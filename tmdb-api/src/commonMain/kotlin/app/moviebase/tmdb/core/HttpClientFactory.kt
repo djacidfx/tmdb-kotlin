@@ -75,7 +75,7 @@ internal object HttpClientFactory {
             HttpResponseValidator {
                 validateResponse { response ->
                     val tmdbErrorResponse = json.decodeTmdbErrorResponse(response) ?: return@validateResponse
-                    throw TmdbException(tmdbErrorResponse)
+                    throw TmdbException(tmdbErrorResponse, requestUrl = response.call.request.url.toString())
                 }
             }
 
